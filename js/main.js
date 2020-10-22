@@ -28,13 +28,30 @@ if (word == reverse){
 }
 
 
+//seconda parte
+//pari e dispari contro il computer
+var choiceUser = prompt('Scegli pari o dispari');
+while (choiceUser != 'pari' && choiceUser != 'dispari'){
+    choiceUser = prompt('Scegli pari o dispari');
+}
 
+var userNumber = randomNumber(1,5);
+console.log(userNumber);
+var computerNumber = randomNumber(1,5);
+console.log(computerNumber);
 
+var game = pariDispari(userNumber, computerNumber);
+
+if (choiceUser == game){
+    console.log('Complimenti: hai vinto')
+} else {
+    console.log('Ha vinto il computer')
+}
 
 //funzioni
 
 /**
- * funzione che, data una parola in ingresso, ne restituisce la stessa letta al contrario
+ * Data una parola in ingresso, ne restituisce la stessa letta al contrario
  * @param {*} wordRev input parola da invertire
  */
 function reverseWord(wordRev){
@@ -43,6 +60,29 @@ function reverseWord(wordRev){
         rev += wordRev[i];
     }
     return rev 
+}
+
+/**
+ * Dati in ingresso il numero più basso e quello più alto, ne restituisce un numero random compreso tra i due 
+ * @param {*} min numero minimo (compreso) 
+ * @param {*} max numero massimo (compreso) 
+ */
+function randomNumber(min, max){
+    var ran = Math.floor(Math.random()* (max - min +1)) + min;
+    return ran;
+}
+
+/**
+ * Dati due numeri in ingresso la funzione da in uscita se la somma dei due sarà pari o dispari 
+ * @param {*} num1 primo numero
+ * @param {*} num2 secondo numero
+ */
+function pariDispari(num1, num2){
+    var somma = num1 + num2;
+    if (somma %2 ==0 ) {
+        return 'pari';
+    }
+    return 'dispari';
 }
 
 
