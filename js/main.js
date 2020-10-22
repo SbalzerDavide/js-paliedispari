@@ -17,36 +17,64 @@ Consigli del giorno
 
 //prima parte
 //trovare se una data parola in ingesso è palindoma o meno 
-var word = prompt ('Inserisci una parola').toLowerCase().trim();
 
-var reverse = reverseWord(word);
+//referenza bottone
+var generate = document.getElementById('go');
 
-if (word == reverse){
-    console.log('la parola inserita è palindorma')
-} else{
-    console.log('la parola inserita NON è palindorma')
-}
+//evento generato dal click
+generate.addEventListener('click', function(){
+    //recupero dati da HTML
+    var word = document.getElementById('input-word').value;
+
+    //elaborazione dati
+    var wordLow = word.toLowerCase();
+    var reverse = reverseWord(wordLow);
+    var result = '';
+    if (wordLow == reverse){
+        result= 'la parola inserita è palindorma';
+    } else{
+        result = 'la parola inserita NON è palindorma';
+    }
+
+    //ritorno valore su HTML
+    var outPutResult = document.getElementById('result').innerHTML = result;
+})
+
 
 
 //seconda parte
 //pari e dispari contro il computer
-var choiceUser = prompt('Scegli pari o dispari');
-while (choiceUser != 'pari' && choiceUser != 'dispari'){
-    choiceUser = prompt('Scegli pari o dispari');
-}
 
-var userNumber = randomNumber(1,5);
-console.log(userNumber);
-var computerNumber = randomNumber(1,5);
-console.log(computerNumber);
+//var choiceUser = prompt('Scegli pari o dispari');
 
-var game = pariDispari(userNumber, computerNumber);
+var startGame = document.getElementById('confirm');
 
-if (choiceUser == game){
-    console.log('Complimenti: hai vinto')
-} else {
-    console.log('Ha vinto il computer')
-}
+startGame.addEventListener('click', function(){
+    //acquisizione scelta dell'utente
+    var choiceUser= document.getElementById('pari-dispari').value;
+    
+    //generazione numero casuale utente
+    var userNumber = randomNumber(1,5);
+    var userNumberOutPut = document.getElementById('user').innerHTML = userNumber;
+
+    //generazione numero casuale computer
+    var computerNumber = randomNumber(1,5);
+    var computerNumberOutPut = document.getElementById('computer').innerHTML = computerNumber;
+    
+    //analisi vincitore
+    var game = pariDispari(userNumber, computerNumber);
+    
+    var winner = '';
+    if (choiceUser == game){
+        winner = 'Complimenti: hai vinto';
+    } else {
+        winner = 'Ha vinto il computer';
+    }
+
+    //esportazione dati su html
+    var printWinner = document.getElementById('winner').innerHTML = winner;
+
+})
 
 //funzioni
 
